@@ -1,0 +1,40 @@
+CREATE TABLE `survey`.`or_user_mst` (
+  `user_id` INT NOT NULL,
+  `user_name` VARCHAR(45) NOT NULL,
+  `user_email` VARCHAR(45) NOT NULL,
+  `isActive` TINYINT NOT NULL,
+  PRIMARY KEY (`user_id`));
+
+
+CREATE TABLE `survey`.`or_survey_user_map` (
+  `map_id` INT NOT NULL,
+  `survey_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`map_id`));
+
+CREATE TABLE `survey`.`or_question_mst` (
+  `question_id` INT NOT NULL,
+  `survey_id` INT NOT NULL,
+  `question` VARCHAR(100) NOT NULL,
+  `choice1` VARCHAR(45) NULL,
+  `choice2` VARCHAR(45) NULL,
+  `choice3` VARCHAR(45) NULL,
+  PRIMARY KEY (`question_id`));
+
+
+
+CREATE TABLE `survey`.`or_survey_mst` (
+  `survey_id` INT NOT NULL,
+  `survey_name` VARCHAR(45) NOT NULL,
+  `survey_status` VARCHAR(45) NOT NULL,
+  `survey_version` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`survey_id`));
+
+
+CREATE TABLE `survey`.`or_survey_user_choice` (
+  `choice_id` INT NOT NULL,
+  `map_id` INT NOT NULL,
+  `question_id` INT NOT NULL,
+  `choice_selected` VARCHAR(45) NULL,
+  `choice_freetext` VARCHAR(45) NULL,
+  PRIMARY KEY (`choice_id`));

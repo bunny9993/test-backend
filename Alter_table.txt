@@ -1,0 +1,53 @@
+ALTER TABLE `survey`.`or_survey_user_map` 
+ADD INDEX `survey_id_idx` (`survey_id` ASC) VISIBLE;
+;
+ALTER TABLE `survey`.`or_survey_user_map` 
+ADD CONSTRAINT `survey_id`
+  FOREIGN KEY (`survey_id`)
+  REFERENCES `survey`.`or_survey_mst` (`survey_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `survey`.`or_survey_user_map` 
+ADD INDEX `user_id_idx` (`user_id` ASC) VISIBLE;
+;
+ALTER TABLE `survey`.`or_survey_user_map` 
+ADD CONSTRAINT `user_id`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `survey`.`or_user_mst` (`user_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `survey`.`or_question_mst` 
+ADD INDEX `survey_id_idx` (`survey_id` ASC) VISIBLE;
+;
+ALTER TABLE `survey`.`or_question_mst` 
+ADD CONSTRAINT `survey_id`
+  FOREIGN KEY (`survey_id`)
+  REFERENCES `survey`.`or_survey_mst` (`survey_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+ALTER TABLE `survey`.`or_question_mst` 
+ADD CONSTRAINT `survey_id_question_mst`
+  FOREIGN KEY (`survey_id`)
+  REFERENCES `survey`.`or_survey_mst` (`survey_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `survey`.`or_survey_user_choice` 
+ADD INDEX `map_id_idx` (`map_id` ASC) VISIBLE,
+ADD INDEX `question_id_idx` (`question_id` ASC) VISIBLE;
+;
+ALTER TABLE `survey`.`or_survey_user_choice` 
+ADD CONSTRAINT `map_id`
+  FOREIGN KEY (`map_id`)
+  REFERENCES `survey`.`or_survey_user_map` (`map_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `question_id`
+  FOREIGN KEY (`question_id`)
+  REFERENCES `survey`.`or_question_mst` (`question_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
